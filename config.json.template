@@ -19,7 +19,7 @@
     "AllowHighQualityDesktop": true,
     "desktopMultiplex": true,
     "TLSOffload": false,
-    "_TrustedProxy": "traefik",
+    "_TrustedProxy": "localhost",
     "SelfUpdate": false,
     "AllowFraming": false,
     "WebRTC": false,
@@ -29,7 +29,7 @@
         { "urls": "stun:stun.gmx.de:3478" },
         { "urls": "stun:stun.1und1.de:3478" }
       ]
-    },
+    }
   },
   "domains": {
     "": {
