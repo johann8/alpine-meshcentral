@@ -1,4 +1,4 @@
-<h1 align="center">Meshcentral</h1> ## 🐋
+<h1 align="center">Meshcentral</h1>
 
 <p align='justify'>
 
@@ -6,7 +6,7 @@
 
 </p>
 
-## Meshcentral Docker Image
+## Meshcentral Docker Image 🐋
 Image is based on [Alpine 3.17](https://hub.docker.com/repository/docker/johann8/alpine-meshcentral/general)
 
 | pull | size | version | platform |
