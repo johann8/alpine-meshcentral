@@ -22,13 +22,13 @@ services:
       - TZ=${TZ}
     volumes:
       # config.json and other important files live here. A must for data persistence
-      - "${DOCKERDIR}/data/mc-data:/opt/meshcentral/meshcentral-data"
+      - "${DOCKERDIR}/data/mc/data:/opt/meshcentral/meshcentral-data"
       # where file uploads for users live
-      - "${DOCKERDIR}/data/mc-user_files:/opt/meshcentral/meshcentral-files"
+      - "${DOCKERDIR}/data/mc/user_files:/opt/meshcentral/meshcentral-files"
       # location for the meshcentral-backups
-      - "${DOCKERDIR}data/mc-backup:/opt/meshcentral/meshcentral-backup"
+      - "${DOCKERDIR}data/mc/backup:/opt/meshcentral/meshcentral-backup"
       # location for site customization files
-      - "${DOCKERDIR}data/mc-web:/opt/meshcentral/meshcentral-web"
+      - "${DOCKERDIR}data/mc/web:/opt/meshcentral/meshcentral-web"
     env_file:
       - .env
     depends_on:
@@ -43,8 +43,8 @@ services:
     restart: "always"
     volumes:
       # mongodb data-directory - A must for data persistence
-      - "${DOCKERDIR}/mongodb-data:/data/db"
-      - "${DOCKERDIR}/mongodb-config:/data/configdb"
+      - "${DOCKERDIR}data/mongodb/dbdata:/data/db"
+      - "${DOCKERDIR}data/mongodb/config:/data/configdb"
     env_file:
       - .env
     networks:
