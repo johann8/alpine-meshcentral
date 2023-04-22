@@ -26,9 +26,11 @@ else
 
    # create session key if empty 
    if [ -z "$SESSION_KEY" ]; then
-       SESSION_KEY="$(cat /dev/urandom | tr -dc 'A-Za-z0-9!#$%&()*+,-./:;<=>?@[\]^_`{|}~' | fold -w 32 | head -n 1)"
+       #SESSION_KEY="$(cat /dev/urandom | tr -dc 'A-Za-z0-9!#$%&()*+,-./:;<=>?@[\]^_`{|}~' | fold -w 32 | head -n 1)"
+       SESSION_KEY="$(cat /dev/urandom | tr -dc 'A-Za-z0-9!#%&()*+,-:;<=>?@_{|}~' | fold -w 40 | head -n 1)";
    fi
-   sed -i "s/\"_sessionKey\": \"MyReallySecretPassword1\"/\"sessionKey\": \"$SESSION_KEY\"/" meshcentral-data/"${CONFIG_FILE}" 
+   #sed -i "s/\"_sessionKey\": \"MyReallySecretPassword1\"/\"sessionKey\": \"$SESSION_KEY\"/" meshcentral-data/"${CONFIG_FILE}" 
+   sed -i '/"_sessionKey"/c\    "sessionKey": "'$SESSION_KEY'",' meshcentral-data/"${CONFIG_FILE}"   
 
    # set reverse proxy
    if [ "$REVERSE_PROXY" != "false" ]; then
