@@ -14,7 +14,7 @@ LABEL org.label-schema.schema-version="1.0" \
       org.label-schema.vcs-url="https://github.com/johann8/" \
       org.label-schema.version=$VERSION
 
-ARG INCLUDE_MONGODBTOOLS=""
+ARG INCLUDE_MONGODBTOOLS="yes"
 
 # environment variables
 ENV NODE_ENV="production"
@@ -48,6 +48,8 @@ RUN apk update \
     && rm -rf /var/cache/apk/*
 RUN npm install -g npm@latest
 
+# install meshcentral
+RUN npm install meshcentral
 
 RUN if ! [ -z "$INCLUDE_MONGODBTOOLS" ] \
     && [ "$INCLUDE_MONGODBTOOLS" != "yes" ] \
