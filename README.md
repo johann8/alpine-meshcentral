@@ -1,10 +1,9 @@
-<h1 align="center">Meshcentral</h1>
+<h1 align="center">Meshcentral</h1> ## 🐋
 
 <p align='justify'>
 
-<a href="https://glpi-project.org">Meshcentral</a> - is an open source IT Asset Management, issue tracking system and service desk system. This software is written in PHP and distributed as open-source software under the GNU General Public License.
+<a href="https://glpi-project.org">Meshcentral</a> - is a full computer management web site. With MeshCentral, you can run your own web server to remotely manage and control computers on a local network or anywhere on the internet. Once you get the server started, create device group and download and install an agent on each computer you want to manage. A minute later, the new computer will show up on the web site and you can take control of it. MeshCentral includes full web-based remote desktop, terminal and file management capability 
 
-GLPI is a web-based application helping companies to manage their information system. The solution is able to build an inventory of all the organization's assets and to manage administrative and financial tasks. The system's functionalities help IT Administrators to create a database of technical resources, as well as a management and history of maintenances actions. Users can declare incidents or requests (based on asset or not) thanks to the Helpdesk feature.
 </p>
 
 ## Meshcentral Docker Image
