@@ -1,0 +1,51 @@
+version: '3.7'
+
+networks:
+  meshcentralNet:
+    ipam:
+      driver: default
+      config:
+        - subnet: ${SUBNET}.0/24
+
+services:
+  meshcentral:
+    restart: always
+    container_name: meshcentral
+    image: johann8/alpine-meshcentral:${D_VERSION}
+    # Only for Apache comment out
+    #ports:
+      #- 127.0.0.1:8084:443  #MeshCentral will moan and try everything not to use port 80, but you can also use it if you so desire, just change the config.json according to your needs
+      #- 8086:443
+    environment:
+      - HOSTNAME=${HOSTNAME}
+      - REVERSE_PROXY=${REVERSE_PROXY}
+      - TZ=${TZ}
+    volumes:
+      # config.json and other important files live here. A must for data persistence
+      - "${DOCKERDIR}/data/mc-data:/opt/meshcentral/meshcentral-data"
+      # where file uploads for users live
+      - "${DOCKERDIR}/data/mc-user_files:/opt/meshcentral/meshcentral-files"
+      # location for the meshcentral-backups
+      - "${DOCKERDIR}data/mc-backup:/opt/meshcentral/meshcentral-backup"
+      # location for site customization files
+      - "${DOCKERDIR}data/mc-web:/opt/meshcentral/meshcentral-web"
+    env_file:
+      - .env
+    depends_on:
+      - mongodb
+    networks:
+      - meshcentralNet
+
+  # mongodb container for meshcentral
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    restart: "always"
+    volumes:
+      # mongodb data-directory - A must for data persistence
+      - "${DOCKERDIR}/mongodb-data:/data/db"
+      - "${DOCKERDIR}/mongodb-config:/data/configdb"
+    env_file:
+      - .env
+    networks:
+      - meshcentralNet

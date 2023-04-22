@@ -1,0 +1,27 @@
+version: "3.7"
+services:
+
+  meshcentral:
+    labels:
+      - "traefik.enable=true"
+
+      ### ==== to https ====
+      - "traefik.http.routers.meshcentral-secure.entrypoints=websecure"
+      - "traefik.http.routers.meshcentral-secure.rule=Host(`$HOSTNAME0.$DOMAINNAME`)"
+      - "traefik.http.routers.meshcentral-secure.tls=true"
+      - "traefik.http.routers.meshcentral-secure.tls.certresolver=production"  # für eigene Zertifikate
+      ### ==== to service ====
+      - "traefik.http.routers.meshcentral-secure.service=meshcentral"
+      - "traefik.http.services.meshcentral.loadbalancer.server.port=${PORT}"
+      - "traefik.http.services.meshcentral.loadbalancer.passHostHeader=true"
+      - "traefik.docker.network=proxy"
+      ### ==== redirect to authelia for secure login ====
+      - "traefik.http.routers.meshcentral-secure.middlewares=secHeaders@file,traefik-compress@file"
+      #- "traefik.http.routers.meshcentral-secure.middlewares=authelia@docker,rate-limit@file,secHeaders@file"
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true
+
