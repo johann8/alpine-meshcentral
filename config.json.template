@@ -3,6 +3,10 @@
   "settings": {
     "plugins":{"enabled": false},
     "_mongoDb": null,
+    "_MongoDbName": "meshcentral",
+    "_Mongodbcol": "meshcentral",
+    "_MongoDbBulkOperations": true,
+    "_DbEncryptKey": "MySuperString123",
     "cert": "myserver.mydomain.com",
     "_WANonly": true,
     "_LANonly": true,
