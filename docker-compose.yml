@@ -11,24 +11,37 @@ services:
   meshcentral:
     restart: always
     container_name: meshcentral
-    image: johann8/alpine-meshcentral:${D_VERSION}
+    image: johann8/alpine-meshcentral:${MC_VERSION}
     # Only for Apache comment out
     #ports:
       #- 127.0.0.1:8084:443  #MeshCentral will moan and try everything not to use port 80, but you can also use it if you so desire, just change the config.json according to your needs
       #- 8086:443
     environment:
-      - HOSTNAME=${HOSTNAME}
-      - REVERSE_PROXY=${REVERSE_PROXY}
       - TZ=${TZ}
+      - HOSTNAME=${HOSTNAME_MC}
+      - REVERSE_PROXY=${REVERSE_PROXY}
+      - REVERSE_PROXY_TLS_PORT=${REVERSE_PROXY_TLS_PORT}
+      - NODE_ENV=${NODE_ENV}
+      - USE_TRAEFIK=${USE_TRAEFIK}
+      - PORT=${PORT}
+      - USE_MONGODB=${USE_MONGODB}
+      - MONGO_URL=${MONGO_URL}
+      - MONGO_MC_USERNAME=${MONGO_MC_USERNAME}
+      - MONGO_MC_USER_PASSWORD=${MONGO_MC_USER_PASSWORD}
+      - IFRAME=${IFRAME}
+      - ALLOW_NEW_ACCOUNTS=${ALLOW_NEW_ACCOUNTS}
+      - WEBRTC=${WEBRTC}
+      - LOCALSESSIONRECORDING=${LOCALSESSIONRECORDING}
+      - MINIFY=${MINIFY}
     volumes:
       # config.json and other important files live here. A must for data persistence
       - "${DOCKERDIR}/data/mc/data:/opt/meshcentral/meshcentral-data"
       # where file uploads for users live
       - "${DOCKERDIR}/data/mc/user_files:/opt/meshcentral/meshcentral-files"
       # location for the meshcentral-backups
-      - "${DOCKERDIR}data/mc/backups:/opt/meshcentral/meshcentral-backups"
+      - "${DOCKERDIR}/data/mc/backups:/opt/meshcentral/meshcentral-backups"
       # location for site customization files
-      - "${DOCKERDIR}data/mc/web:/opt/meshcentral/meshcentral-web"
+      - "${DOCKERDIR}/data/mc/web:/opt/meshcentral/meshcentral-web"
     env_file:
       - .env
     depends_on:
@@ -41,6 +54,9 @@ services:
     image: mongo:latest
     container_name: mongodb
     restart: "always"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
     volumes:
       # mongodb data-directory - A must for data persistence
       - "${DOCKERDIR}/data/mongodb/dbdata:/data/db"
