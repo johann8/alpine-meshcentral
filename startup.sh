@@ -10,12 +10,12 @@ else
    if [ -n "${USE_MONGODB}" ] && [ "${USE_MONGODB}" == "true" ]; then
        if [ -z "${MONGO_URL}" ]; then
            PREFIX=""
-           if [ -n "${MONGO_INITDB_ROOT_USERNAME}" ] && [ -n "${MONGO_INITDB_ROOT_PASSWORD}" ]; then
-               PREFIX="${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@"
+           if [ -n "${MONGO_MC_USERNAME}" ] && [ -n "${MONGO_MC_USER_PASSWORD}" ]; then
+               PREFIX="${MONGO_MC_USERNAME}:${MONGO_MC_USER_PASSWORD}@"
            fi
-           MONGO_URL="${PREFIX}mongodb:27017"
+           MONGO_URL="${PREFIX}mongodb:27017/${MONGO_DB_NAME}"
        fi
-       sed -i "s/\"_mongoDb\": null/\"mongoDb\": \"mongodb:\/\/${MONGO_URL}\"/" meshcentral-data/${CONFIG_FILE}
+       sed -i "s/\"_mongoDb\": null/\"mongoDb\": \"mongodb:\/\/${MONGO_URL}\",/" meshcentral-data/${CONFIG_FILE}
    fi
    sed -i "s/\"cert\": \"myserver.mydomain.com\"/\"cert\": \"${HOSTNAME}\"/" meshcentral-data/${CONFIG_FILE}
    sed -i "s/\"NewAccounts\": true/\"NewAccounts\": \"${ALLOW_NEW_ACCOUNTS}\"/" meshcentral-data/${CONFIG_FILE}
