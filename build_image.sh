@@ -1,11 +1,11 @@
 #!/bin/bash
 
 # set variables
-_VERSION=1.1.5.3
+_VERSION=1.1.5.1
 _TAG=alpine-meshcentral
 
 # create build
-docker build -t johann8/${_TAG}:${_VERSION} . > build.log
+docker build -t johann8/${_TAG}:${_VERSION} . 2>&1 | tee ./build.log
 _BUILD=$?
 if ! [ ${_BUILD} = 0 ]; then
    echo "ERROR: Docker Image build was not successful"
