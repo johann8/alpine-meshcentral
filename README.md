@@ -116,10 +116,10 @@ cd ${DOCKERDIR}
 vim data/mc/data/config.json
 -----
 ...
-    "novnc":true,
-    "mstsc":true,
-    "ssh":true,
-    "GeoLocation": true,
+      "novnc":true,
+      "mstsc":true,
+      "ssh":true,
+      "GeoLocation": true,
 ...
 -----
 ```
@@ -133,10 +133,10 @@ cd ${DOCKERDIR}
 vim data/mc/data/config.json
 -----
 ...
-    "title": "REMOTE SUPPORT PORTAL",
-    "title2": "Muster GmbH",
-    "welcomeText": "<a href='https://changeme.de/' target='_blank' style='text-decoration: none;'>Muster GmbH Consulting</a> - IT Service in Berlin",
-    "Footer": "<a href='https://changeme.de/' target='_blank' style='text-decoration: none;'>Muster GmbH Consulting</a> - IT Service in Berlin",
+      "title": "REMOTE SUPPORT PORTAL",
+      "title2": "Muster GmbH",
+      "welcomeText": "<a href='https://changeme.de/' target='_blank' style='text-decoration: none;'>Muster GmbH Consulting</a> - IT Service in Berlin",
+      "Footer": "<a href='https://changeme.de/' target='_blank' style='text-decoration: none;'>Muster GmbH Consulting</a> - IT Service in Berlin",
 ...
 -----
 ```
@@ -149,18 +149,18 @@ cd ${DOCKERDIR}
 vim data/mc/data/config.json
 -----
 ...
-    "LoginKey":"ADCD94",
-    "agentInviteCodes": true,
-    "PasswordRequirements": {
-       "min": 10,
-       "max": 64,
-       "upper": 1,
-       "lower": 1,
-       "numeric": 1,
-       "nonalpha": 1,
-       "_force2factor": true,
-       "skip2factor": "127.0.0.1,172.26.8.0/24"
-    },
+      "LoginKey":"ADCD94",
+      "agentInviteCodes": true,
+      "PasswordRequirements": {
+         "min": 10,
+         "max": 64,
+         "upper": 1,
+         "lower": 1,
+         "numeric": 1,
+         "nonalpha": 1,
+         "_force2factor": true,
+         "skip2factor": "127.0.0.1,172.26.8.0/24"
+      },
 ...
 -----
 ```
