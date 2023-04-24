@@ -112,7 +112,7 @@ docker-compose logs meshcentral
 ## Mongo database backup
 
 ## Mongo Database restore
-To restore back backup, just install a MeshCentral server, make sure it works correctly. Stop it, wipe the old “meshcentral-data” and “meshcentral-files” and put the backup version instead. If using MongoDB, copy the mongodump-xxx.archive back, make sure to clean up any existing `meshcentral` database. Restore backup.
+To restore back backup, just install a MeshCentral server, make sure it works correctly. Stop it, wipe the old `meshcentral-data` and `meshcentral-files` and put the backup version instead. If using MongoDB, copy the mongodump-xxx.archive back, make sure to clean up any existing `meshcentral` database. Restore backup.
 
 - Unzip `meshcentral` backup on docker host
 ```bash
