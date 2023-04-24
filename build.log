@@ -1,0 +1,56 @@
+#1 [internal] load .dockerignore
+#1 transferring context: 2B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 2.14kB done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/alpine:3.17
+#3 ...
+
+#4 [auth] library/alpine:pull token for registry-1.docker.io
+#4 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/alpine:3.17
+#3 DONE 1.1s
+
+#5 [ 1/10] FROM docker.io/library/alpine:3.17@sha256:124c7d2707904eea7431fffe91522a01e5a861a624ee31d03372cc1d138a3126
+#5 DONE 0.0s
+
+#6 [internal] load build context
+#6 transferring context: 3.83kB done
+#6 DONE 0.0s
+
+#7 [ 4/10] RUN apk update     && apk add --no-cache --update tzdata nodejs npm bash     && rm -rf /var/cache/apk/*
+#7 CACHED
+
+#8 [ 2/10] RUN mkdir -p /opt/meshcentral/meshcentral
+#8 CACHED
+
+#9 [ 3/10] WORKDIR /opt/meshcentral
+#9 CACHED
+
+#10 [ 5/10] RUN npm install -g npm@latest
+#10 CACHED
+
+#11 [ 7/10] RUN if ! [ -z "yes" ]     && [ "yes" != "yes" ]     && [ "yes" != "true" ]; then     echo -e "\e[0;31;49mInvalid value for build argument INCLUDE_MONGODBTOOLS, possible values: yes/true\e[;0m"; exit 1;     fi
+#11 CACHED
+
+#12 [ 6/10] RUN npm install meshcentral
+#12 CACHED
+
+#13 [ 8/10] RUN if ! [ -z "yes" ]; then apk add --no-cache mongodb-tools; rm -rf /var/cache/apk/*; fi
+#13 CACHED
+
+#14 [ 9/10] COPY startup.sh startup.sh
+#14 DONE 0.0s
+
+#15 [10/10] COPY config.json.template /opt/meshcentral/config.json.template
+#15 DONE 0.0s
+
+#16 exporting to image
+#16 exporting layers 0.0s done
+#16 writing image sha256:347cd62e2985485361ebdcc4481cd67291b3069c1fa2d93dca644ce7ffaefe67 done
+#16 naming to docker.io/johann8/alpine-meshcentral:1.1.5 done
+#16 DONE 0.0s
