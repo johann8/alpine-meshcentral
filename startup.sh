@@ -41,16 +41,16 @@ else
            fi
            MONGO_URL="${PREFIX}mongodb:27017/${MONGO_DB_NAME}"
        fi
-       sed -i "s/\"_mongoDb\": null/\"mongoDb\": \"mongodb:\/\/${MONGO_URL}\"/" meshcentral-data/${CONFIG_FILE}       
+       sed -i "s+\"_mongoDb\": null+\"mongoDb\": \"mongodb:\/\/${MONGO_URL}\"+" meshcentral-data/${CONFIG_FILE} 
        sed -i "s/\"_MongoDbName\": \"meshcentral\"/\"MongoDbName\": \"${MONGO_DB_NAME}\"/" meshcentral-data/${CONFIG_FILE}
        sed -i "s/\"_Mongodbcol\": \"meshcentral\"/\"Mongodbcol\": \"${MONGO_DB_NAME}\"/" meshcentral-data/${CONFIG_FILE}
        sed -i "s/\"_MongoDbBulkOperations\": true/\"MongoDbBulkOperations\": true/" meshcentral-data/${CONFIG_FILE}
-       DB_ENCRYPT_KEY=$(pwgen -s 55 1)
+       DB_ENCRYPT_KEY=$(cat /dev/urandom | tr -dc 'A-Za-z0-9!#-' | fold -w 55 | head -n 1)
        sed -i "s/\"_DbEncryptKey\": \"MySuperString123\"/\"DbEncryptKey\": \"${DB_ENCRYPT_KEY}\"/" meshcentral-data/${CONFIG_FILE}
    fi
 
    # set parameters 
-   sed -i "s/\"cert\": \"myserver.mydomain.com\"/\"cert\": \"${HOSTNAME}\"/" meshcentral-data/${CONFIG_FILE}
+   sed -i "s/\"cert\": \"myserver.mydomain.com\"/\"cert\": \"${HOSTNAME_MC}\"/" meshcentral-data/${CONFIG_FILE}
    sed -i "s/\"NewAccounts\": true/\"NewAccounts\": \"${ALLOW_NEW_ACCOUNTS}\"/" meshcentral-data/${CONFIG_FILE}
    sed -i "s/\"localSessionRecording\": false/\"localSessionRecording\": ${LOCALSESSIONRECORDING}/" meshcentral-data/${CONFIG_FILE}
    sed -i "s/\"minify\": true/\"minify\": ${MINIFY}/" meshcentral-data/${CONFIG_FILE}
@@ -79,6 +79,7 @@ else
       exit 0
    fi
    welcome
-   node node_modules/meshcentral --cert "${HOSTNAME}"
+   node node_modules/meshcentral
+   #node node_modules/meshcentral --cert "${HOSTNAME_MC}"
 fi
 
