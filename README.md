@@ -140,3 +140,5 @@ cat .env |grep MONGO_
 docker-compose exec meshcentral sh
 mongorestore --host=mongodb --port=27017 --authenticationDatabase="admin" -u="admin" -p="Root-PW-ChangeMe579" --archive=/opt/meshcentral/meshcentral-backups/mongodump-2023-04-24-12-27.archive
 ```
+
+Enjoy!
