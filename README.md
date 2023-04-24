@@ -55,6 +55,9 @@ pwgen -1cnsB 30 1
 vim .env
 -----
 ...
+HOSTNAME_MC=mc.changeme.de
+DOMAINNAME=changeme.de
+...
 MONGO_MC_USER_PASSWORD=User-PW-ChangeMe135
 ...
 MONGO_INITDB_ROOT_PASSWORD=Root-PW-ChangeMe579
