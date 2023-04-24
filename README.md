@@ -20,7 +20,7 @@ Image is based on [Alpine 3.17](https://hub.docker.com/repository/docker/johann8
   - [Meshcentral general configuration](#meshcentral-general-configuration)
   - [Meshcentral SMTP configuration](#meshcentral-smtp-configuration)
 - [Mongo database backup](#mongo-database-backup)
-- [Mongo Database restore](#database-restore)
+- [Mongo Database restore](#mongo-database-restore)
 
 ## Install Meshcentral docker container
 
