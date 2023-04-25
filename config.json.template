@@ -25,6 +25,15 @@
     "TLSOffload": false,
     "_TrustedProxy": "localhost",
     "SelfUpdate": false,
+    "nice404": true,
+    "no2FactorAuth": false,
+    "CookieIpCheck": true,
+    "AuthLog": "/opt/meshcentral/meshcentral-data/auth.log",
+    "watchDog": { "interval": 100, "timeout": 400 },
+    "Compression": false,
+    "WsCompression": false,
+    "AgentWsCompression": false,
+    "NoAgentUpdate": 0,
     "AllowFraming": false,
     "WebRTC": false,
     "WebRtcConfig": {
@@ -43,6 +52,25 @@
       "NewAccounts": true,
       "localSessionRecording": false,
       "_userNameIsEmail": true,
+      "consentMessages": {
+          "consentTimeout" : 30,
+          "autoAcceptOnTimeout": true
+      },
+      "terminal": {
+         "linuxshell": "any",
+         "launchCommand": {
+            "linux": "cd /tmp\nclear\necho \"Hello Linux\"\n",
+            "_darwin": "clear\necho \"Hello MacOS\"\n",
+            "_freebsd": "clear\necho \"Hello FreeBSD\"\n"
+         }
+      },
+      "agentCustomization": {
+          "_displayName": "MeshCentral Agent MyFirma",
+          "_description": "Allows MyCompany to provide full service remote support to this computer.",
+          "_companyName": "MyFirma GmbH",
+          "_serviceName": "WKT Remote Support Agent",
+          "_fileName": "MyCompanyAgent"
+      },
       "_certUrl": "my.reverse.proxy"
     }
   },
