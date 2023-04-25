@@ -152,7 +152,7 @@ cd ${DOCKERDIR}
 vim data/mc/data/config.json
 -----
 ...
-      "LoginKey":"ADCD94",
+      "LoginKey":"ABCD94",
       "agentInviteCodes": true,
       "PasswordRequirements": {
          "min": 10,
@@ -162,8 +162,69 @@ vim data/mc/data/config.json
          "numeric": 1,
          "nonalpha": 1,
          "_force2factor": true,
+         "_backupcode2factor": true,
+         "_single2factorWarning": false,
          "skip2factor": "127.0.0.1,172.26.8.0/24"
       },
+...
+-----
+docker-compose down && docker-compose up -d
+
+After that login page changes to: https://mc.changeme.de/login?key=ABCD94
+```
+- Enable backups under `main` section
+```bash
+DOCKERDIR=/opt/meshcentral
+cd ${DOCKERDIR}
+vim data/mc/data/config.json
+-----
+...
+    "AutoBackup": {
+       "backupIntervalHours": 24,
+       "keepLastDaysBackup": 14,
+       "backupPath": "/opt/meshcentral/meshcentral-backups"
+    },
+...
+-----
+```
+- Enable `DesktopMultiplex`  under `main` section
+```bash
+DOCKERDIR=/opt/meshcentral
+cd ${DOCKERDIR}
+vim data/mc/data/config.json
+-----
+...
+    "DesktopMultiplex": true,
+    "AllowHighQualityDesktop": true,
+...
+-----
+```
+
+- Enable `WANonly` under `main` section
+```bash
+DOCKERDIR=/opt/meshcentral
+cd ${DOCKERDIR}
+vim data/mc/data/config.json
+-----
+...
+    "WANonly": true,
+...
+-----
+```
+
+- Set `MaxInvalidLogin` under `main` section
+```bash
+DOCKERDIR=/opt/meshcentral
+cd ${DOCKERDIR}
+vim data/mc/data/config.json
+-----
+...
+    "MaxInvalidLogin": {
+       "time": 5,
+       "count": 5,
+       "coolofftime": 30
+    },
+    "AuthLog": "/opt/meshcentral/meshcentral-data/auth.log",
 ...
 -----
 ```
