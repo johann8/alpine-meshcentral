@@ -21,7 +21,9 @@ if ! [ -z ${TZ} ]; then
   # delete file localtime if exist and create new one
   if [ -f /etc/localtime ] ; then
     rm /etc/localtime
+    echo -n "Setting timezone...               "
     ln -snf /usr/share/zoneinfo/${TZ} /etc/localtime && echo ${TZ} > /etc/timezone
+    echo "[DONE]"
   fi
 fi
 
@@ -30,7 +32,9 @@ if [ -f "meshcentral-data/${CONFIG_FILE}" ]; then
    welcome
    node node_modules/meshcentral
 else
+   echo -n "Coping config.json.template...     "
    cp config.json.template meshcentral-data/${CONFIG_FILE}
+   echo "[DONE]"
 
    # use mongodb
    if [ -n "${USE_MONGODB}" ] && [ "${USE_MONGODB}" == "true" ]; then
@@ -41,12 +45,26 @@ else
            fi
            MONGO_URL="${PREFIX}mongodb:27017/${MONGO_DB_NAME}"
        fi
+       echo -n "Setting mongodb URL...               "
        sed -i "s+\"_mongoDb\": null+\"mongoDb\": \"mongodb:\/\/${MONGO_URL}\"+" meshcentral-data/${CONFIG_FILE} 
+       echo "[DONE]"
+
+       echo -n "Setting mongodb URL...               "
        sed -i "s/\"_MongoDbName\": \"meshcentral\"/\"MongoDbName\": \"${MONGO_DB_NAME}\"/" meshcentral-data/${CONFIG_FILE}
+       echo "[DONE]"
+
+       echo -n "Setting mongodb colections...        "
        sed -i "s/\"_Mongodbcol\": \"meshcentral\"/\"Mongodbcol\": \"${MONGO_DB_NAME}\"/" meshcentral-data/${CONFIG_FILE}
+       echo "[DONE]"
+
+       echo -n "Setting mongodb bulk operations...   "
        sed -i "s/\"_MongoDbBulkOperations\": true/\"MongoDbBulkOperations\": true/" meshcentral-data/${CONFIG_FILE}
+       echo "[DONE]"
+
        DB_ENCRYPT_KEY=$(cat /dev/urandom | tr -dc 'A-Za-z0-9!#-' | fold -w 55 | head -n 1)
+       echo -n "Setting mongodb encrypt key...       "
        sed -i "s/\"_DbEncryptKey\": \"MySuperString123\"/\"DbEncryptKey\": \"${DB_ENCRYPT_KEY}\"/" meshcentral-data/${CONFIG_FILE}
+       echo "[DONE]"
    fi
 
    # set parameters 
