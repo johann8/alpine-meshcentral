@@ -21,6 +21,7 @@ Image is based on [Alpine 3.17](https://hub.docker.com/repository/docker/johann8
   - [Meshcentral SMTP configuration](#meshcentral-smtp-configuration)
 - [Mongo database backup](#mongo-database-backup)
 - [Mongo Database restore](#mongo-database-restore)
+- [Move Meshcentral container to another host](#move-meshcentral-container-to-another-host])
 
 ## Install Meshcentral docker container
 
@@ -253,6 +254,24 @@ vim data/mc/data/config.json
 
 ## Mongo database backup
 
+- Add to `config.json` option
+```bash
+DOCKERDIR=/opt/meshcentral
+cd ${DOCKERDIR}
+
+# Enter this block under section "domains"
+vim data/mc/data/config.json
+-----
+...
+    "AutoBackup": {
+       "backupIntervalHours": 24,
+       "keepLastDaysBackup": 15,
+       "backupPath": "/opt/meshcentral/meshcentral-backups"
+    },
+...
+-----
+```
+
 ## Mongo Database restore
 To restore back backup, just install a MeshCentral server, make sure it works correctly. Stop it, wipe the old `meshcentral-data` and `meshcentral-files` and put the backup version instead. If using MongoDB, copy the mongodump-xxx.archive back, make sure to clean up any existing `meshcentral` database. Restore backup.
 
@@ -282,6 +301,55 @@ cd ${DOCKERDIR}
 cat .env |grep MONGO_
 docker-compose exec meshcentral sh
 mongorestore --host=mongodb --port=27017 --authenticationDatabase="admin" -u="admin" -p="Root-PW-ChangeMe579" --archive=/opt/meshcentral/meshcentral-backups/mongodump-2023-04-24-12-27.archive
+
+# restart container and show logs
+DOCKERDIR=/opt/meshcentral
+cd ${DOCKERDIR}
+docker-compose down && docker-compose up -d
+docker-compose logs -f --tail=1000 meshcentral
+```
+## Move Meshcentral container to another host
+
+- Install `meshcentral` docker on the new server and make sure everything is working
+```bash
+# make a copy of folder data
+DOCKERDIR=/opt/meshcentral
+cd ${DOCKERDIR}
+docker-compose stop meshcentral
+cd data/mc/
+mv data data_bkp
+mkdir data
+
+# copy all files from last backup into folder data E.g. with mc
+# unzipp momgodb last backup in same folder
+DOCKERDIR=/opt/meshcentral
+cd ${DOCKERDIR}data/mc/backups/
+unzip meshcentral-autobackup-2023-04-24-22-40.zip
+
+# run container meshcentral
+docker-compose start meshcentral
+
+# delete old mongo database
+DOCKERDIR=/opt/meshcentral
+cd ${DOCKERDIR}
+cat .env |grep MONGO_
+docker-compose exec mongodb mongosh --host localhost -u admin
+use meshcentral
+db.dropDatabase()
+exit
+
+# restore database from last backup
+DOCKERDIR=/opt/meshcentral
+cd ${DOCKERDIR}
+cat .env |grep MONGO_
+docker-compose exec meshcentral sh
+mongorestore --host=mongodb --port=27017 --authenticationDatabase="admin" -u="admin" -p="TsPee4ofzRqM7uVuA4vdnusugCxeHX" --archive=/opt/meshcentral/meshcentral-backups/mongodump-2023-04-24-22-40.archive
+
+# restart container and show logs
+DOCKERDIR=/opt/meshcentral
+cd ${DOCKERDIR}
+docker-compose down && docker-compose up -d
+docker-compose logs -f --tail=1000 meshcentral
 ```
 
 Enjoy!
