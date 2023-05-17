@@ -1,4 +1,4 @@
-FROM alpine:3.17
+FROM alpine:3.18
 
 LABEL maintainer="JH <jh@localhost>"
 
@@ -11,7 +11,7 @@ LABEL org.label-schema.schema-version="1.0" \
       org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.name=$NAME \
       org.label-schema.vcs-ref=$VCS_REF \
-      org.label-schema.vcs-url="https://github.com/johann8/" \
+      org.label-schema.vcs-url="https://github.com/johann8/alpine-meshcentral" \
       org.label-schema.version=$VERSION
 
 ARG INCLUDE_MONGODBTOOLS="yes"
