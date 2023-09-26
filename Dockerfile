@@ -40,6 +40,7 @@ ENV SESSION_KEY=""
 ENV REVERSE_PROXY="false"
 ENV REVERSE_PROXY_TLS_PORT=""
 ENV USE_TRAEFIK="false"
+ENV ARGS=""
 
 # add installation directories
 RUN mkdir -p /opt/meshcentral/meshcentral

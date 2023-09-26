@@ -34,6 +34,7 @@ services:
       - WEBRTC=${WEBRTC}
       - LOCALSESSIONRECORDING=${LOCALSESSIONRECORDING}
       - MINIFY=${MINIFY}
+      - ARGS=${ARGS}
     volumes:
       # config.json and other important files live here. A must for data persistence
       - "${DOCKERDIR}/data/mc/data:/opt/meshcentral/meshcentral-data"
