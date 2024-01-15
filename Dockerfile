@@ -19,7 +19,7 @@ ARG INCLUDE_MONGODBTOOLS="yes"
 # environment variables
 ENV NODE_ENV="production"
 ENV CONFIG_FILE="config.json"
-ENV MESHCENTRAL_VERSION 1.1.16
+ENV MESHCENTRAL_VERSION 1.1.18
 
 # environment variables for initial configuration file
 ENV USE_MONGODB="false"
@@ -49,7 +49,7 @@ RUN mkdir -p /opt/meshcentral/meshcentral
 WORKDIR /opt/meshcentral
 
 RUN apk update \
-    && apk add --no-cache --update tzdata nodejs npm bash \
+    && apk add --no-cache --update tzdata nodejs npm bash python3 make gcc g++ \
     && rm -rf /var/cache/apk/*
 RUN npm install -g npm@latest
 
