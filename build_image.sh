@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # set variables
-_VERSION=1.1.18
+_VERSION=1.1.19
 _TAG=alpine-meshcentral
 
 # create build
