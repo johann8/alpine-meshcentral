@@ -7,7 +7,7 @@
 </p>
 
 ## Meshcentral Docker Image 🐋
-Image is based on [Alpine 3.18](https://hub.docker.com/repository/docker/johann8/alpine-meshcentral/general)
+Image is based on [Alpine 3.19](https://hub.docker.com/repository/docker/johann8/alpine-meshcentral/general)
 
 | pull | size | version | platform | alpine version |
 |:---------------------------------:|:----------------------------------:|:--------------------------------:|:--------------------------------:|:--------------------------------:|
