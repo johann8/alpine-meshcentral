@@ -19,7 +19,7 @@ ARG INCLUDE_MONGODBTOOLS="yes"
 # environment variables
 ENV NODE_ENV="production"
 ENV CONFIG_FILE="config.json"
-ENV MESHCENTRAL_VERSION 1.1.23
+ENV MESHCENTRAL_VERSION 1.1.24
 
 # environment variables for initial configuration file
 ENV USE_MONGODB="false"
