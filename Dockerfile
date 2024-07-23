@@ -15,11 +15,13 @@ LABEL org.label-schema.schema-version="1.0" \
       org.label-schema.version=$VERSION
 
 ARG INCLUDE_MONGODBTOOLS="yes"
+ARG PREINSTALL_LIBS="true"
 
 # environment variables
 ENV NODE_ENV="production"
 ENV CONFIG_FILE="config.json"
-ENV MESHCENTRAL_VERSION 1.1.24
+ENV NODE_VERSION v18.20.4
+ENV MESHCENTRAL_VERSION 1.1.26
 
 # environment variables for initial configuration file
 ENV USE_MONGODB="false"
@@ -63,6 +65,8 @@ RUN if ! [ -z "$INCLUDE_MONGODBTOOLS" ] \
     fi
 
 RUN if ! [ -z "$INCLUDE_MONGODBTOOLS" ]; then apk add --no-cache mongodb-tools; rm -rf /var/cache/apk/*; fi
+
+RUN if ! [ -z "$PREINSTALL_LIBS" ] && [ "$PREINSTALL_LIBS" == "true" ]; then cd meshcentral && npm install ssh2@1.15.0 semver@7.5.4 nodemailer@6.9.8 image-size@1.0.2 wildleek@2.0.0 otplib@10.2.3 yubikeyotp@0.2.0; fi
 
 COPY startup.sh startup.sh
 COPY config.json.template /opt/meshcentral/config.json.template
