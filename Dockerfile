@@ -20,8 +20,8 @@ ARG PREINSTALL_LIBS="true"
 # environment variables
 ENV NODE_ENV="production"
 ENV CONFIG_FILE="config.json"
-ENV NODE_VERSION v18.20.4
-ENV MESHCENTRAL_VERSION 1.1.26
+ENV NODE_VERSION v20.15.1-r0
+ENV MESHCENTRAL_VERSION 1.1.29
 
 # environment variables for initial configuration file
 ENV USE_MONGODB="false"
